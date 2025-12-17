@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import List, Optional
+from typing import List, Optional,  Literal
 from enum import Enum
 
 class DifficultyLevel(str, Enum):
@@ -11,10 +11,10 @@ class Message(BaseModel):
     role: str
     content: str
 
-class StartSessionRequest(BaseModel):   # 👈 THIS MUST EXIST
-    topic: str = Field(..., min_length=3)
-    difficulty: DifficultyLevel
-    objective: str = Field(..., min_length=10)
+class StartSessionRequest(BaseModel):
+    topic: Optional[str] = "General"
+    difficulty: Literal["beginner", "intermediate", "advanced"] = "beginner"
+    objective: Optional[str] = "Teach the concept clearly"
 
 class QuestionStage(str, Enum):
     mechanism = "mechanism"

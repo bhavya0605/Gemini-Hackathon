@@ -4,7 +4,7 @@ from services.session_manager import create_session
 from fastapi import APIRouter, HTTPException
 from services.session_manager import get_session, delete_session
 from services.evaluation_engine import evaluate_teaching
-
+from typing import Optional
 # router = APIRouter(prefix="/session")
 
 
@@ -12,7 +12,20 @@ from services.evaluation_engine import evaluate_teaching
 router = APIRouter(prefix="/session", tags=["Session"])
     
 @router.post("/start")
-def start_session(payload: StartSessionRequest):
+async def start_session(payload: Optional[StartSessionRequest] = None):
+    """
+    Starts a new teaching session.
+    If no payload is provided, defaults are used.
+    """
+
+    if payload is None:
+        payload = StartSessionRequest(
+            topic="General Topic",
+            difficulty="beginner",
+            objective="Teach the AI student"
+        )
+
+
     session = create_session(payload)
 
     return {
