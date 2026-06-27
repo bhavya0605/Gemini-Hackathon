@@ -252,6 +252,11 @@ GEMINI_API_KEY = "your_api_key_here"
 * EdTech experimentation
 
 ---
+## Contributors
+
+- Bhavya Shah
+- Satya
+
 
 ## 🏁 Conclusion
 
